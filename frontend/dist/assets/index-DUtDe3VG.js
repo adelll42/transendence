@@ -1,0 +1,17 @@
+const __vite__mapDeps=(i,m=__vite__mapDeps,d=(m.f||(m.f=["assets/index-CA-6fEX3.js","assets/index-DZIOIZze.css"])))=>i.map(i=>d[i]);
+import{c as p}from"./shapes-7Z1ZtB9Y.js";import{_ as d}from"./index-CA-6fEX3.js";import{s as o}from"./notification--NRigmGR.js";function h(){const e=document.createElement("div");e.className="relative flex items-center justify-center min-h-screen bg-gradient-to-r from-green-400 via-blue-500 to-purple-600 animate-fade-bg overflow-hidden";const t=document.createElement("div");t.className="absolute inset-0 overflow-hidden z-0",e.appendChild(t);const r=document.createElement("div");return r.className="relative bg-gray-800 bg-opacity-90 p-8 rounded-lg shadow-lg transform transition duration-500 hover:scale-105 z-10",r.innerHTML=`
+    <h1 class="text-3xl font-bold text-center text-white mb-6">Register</h1>
+    <form id="register-form" class="flex flex-col gap-4">
+      <div class="relative">
+        <input id="email" type="email" placeholder="Email" class="w-full p-3 rounded bg-gray-700 text-white focus:outline-none focus:ring-2 focus:ring-blue-500" required>
+      </div>
+      <div class="relative">
+        <input id="username" type="text" placeholder="Username" class="w-full p-3 rounded bg-gray-700 text-white focus:outline-none focus:ring-2 focus:ring-blue-500" required>
+      </div>
+      <div class="relative">
+        <input id="password" type="password" placeholder="Password" class="w-full p-3 rounded bg-gray-700 text-white focus:outline-none focus:ring-2 focus:ring-blue-500" required>
+      </div>
+      <button type="submit" class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded transition duration-300">Register</button>
+    </form>
+    <button id="login-button" class="mt-4 text-blue-300 hover:text-blue-500 transition duration-300 underline">Already have an account? Login</button>
+  `,e.appendChild(r),setInterval(()=>p(t),600),e}async function v(e,t,r){const n=await fetch("/api/auth/register",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({email:e,username:t,password:r})});if(!n.ok){const a=await n.json();throw new Error(a.error)}}function b(e){return/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(e)}function w(e){return/^(?=.*[A-Z]).{8,}$/.test(e)}function y(e){return/^(?=.*[a-zA-Z].*[a-zA-Z].*[a-zA-Z]).{5,}$/.test(e)}function x(e,t,r){return!e||!t||!r?"Please fill in all fields.":b(e)?y(t)?w(r)?null:"Password must be at least 8 characters long and contain at least one uppercase letter.":"Username must be at least 5 characters long and contain at least 3 letters.":"Please enter a valid email address."}function E(e){const t=e.querySelector("#register-form"),r=e.querySelector("#login-button");t.addEventListener("submit",async n=>{n.preventDefault();const a=document.getElementById("email"),m=document.getElementById("username"),g=document.getElementById("password"),i=a.value.trim(),l=m.value.trim(),u=g.value.trim(),c=x(i,l,u);if(c){o(c,"error");return}try{await v(i,l,u),o("Registration successful! Please log in.","success"),history.pushState(null,"","/"),d(()=>import("./index-CA-6fEX3.js").then(s=>s.r),__vite__mapDeps([0,1])).then(s=>s.router())}catch(s){const f=s instanceof Error?s.message:"An unknown error occurred";o("Registration failed: "+f,"error")}}),r.addEventListener("click",()=>{history.pushState(null,"","/"),d(()=>import("./index-CA-6fEX3.js").then(n=>n.r),__vite__mapDeps([0,1])).then(n=>n.router())})}async function P(e){e.innerHTML="";const t=h();e.appendChild(t),E(t)}export{P as render};
