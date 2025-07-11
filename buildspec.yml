@@ -3,6 +3,8 @@ version: 0.2
 phases:
   build:
     commands:
+      - echo Logging in to Docker Hub...
+      - echo $DOCKERHUB_PASS | docker login -u $DOCKERHUB_USER --password-stdin
       - echo Building backend...
       - docker build -t backend ./backend
       - docker tag backend:latest 577638398727.dkr.ecr.eu-west-2.amazonaws.com/backend:latest
