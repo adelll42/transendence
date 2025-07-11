@@ -28,6 +28,8 @@ phases:
 
       - echo Generating imagedefinitions.json...
       - echo '[{"name":"nginx","imageUri":"577638398727.dkr.ecr.eu-west-2.amazonaws.com/nginx:latest"},{"name":"frontend","imageUri":"577638398727.dkr.ecr.eu-west-2.amazonaws.com/frontend:latest"},{"name":"backend","imageUri":"577638398727.dkr.ecr.eu-west-2.amazonaws.com/backend:latest"}]' > imagedefinitions.json
+      - echo Contents of imagedefinitions.json:
+      - cat imagedefinitions.json
 
 artifacts:
   files:
