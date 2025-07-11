@@ -7,7 +7,7 @@ env:
 phases:
   pre_build:
     commands:
-      - echo Logging into Amazon ECR...
+      - echo Logging in to Amazon ECR...
       - aws ecr get-login-password --region $AWS_REGION | docker login --username AWS --password-stdin 577638398727.dkr.ecr.eu-west-2.amazonaws.com
 
   build:
@@ -26,12 +26,16 @@ phases:
 
   post_build:
     commands:
-      - echo Pushing images to ECR...
+      - echo Pushing backend image...
       - docker push 577638398727.dkr.ecr.eu-west-2.amazonaws.com/backend:latest
+
+      - echo Pushing frontend image...
       - docker push 577638398727.dkr.ecr.eu-west-2.amazonaws.com/frontend:latest
+
+      - echo Pushing nginx image...
       - docker push 577638398727.dkr.ecr.eu-west-2.amazonaws.com/nginx:latest
 
-      - echo Writing imagedefinitions.json...
+      - echo Generating imagedefinitions.json...
       - printf '[{"name":"backend","imageUri":"%s"},{"name":"frontend","imageUri":"%s"},{"name":"nginx","imageUri":"%s"}]' \
           577638398727.dkr.ecr.eu-west-2.amazonaws.com/backend:latest \
           577638398727.dkr.ecr.eu-west-2.amazonaws.com/frontend:latest \
