@@ -1,4 +1,4 @@
-FROM nginx:alpine
+FROM public.ecr.aws/docker/library/nginx:alpine
 
 
 COPY ./nginx/conf.d/ /etc/nginx/conf.d/
