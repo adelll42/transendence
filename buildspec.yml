@@ -1,10 +1,17 @@
 version: 0.2
 
+env:
+  variables:
+    AWS_REGION: eu-west-2
+
 phases:
+  pre_build:
+    commands:
+      - echo Logging in to Amazon ECR...
+      - aws ecr get-login-password --region $AWS_REGION | docker login --username AWS --password-stdin 577638398727.dkr.ecr.eu-west-2.amazonaws.com
+
   build:
     commands:
-      - echo Logging in to Docker Hub...
-      - echo $DOCKERHUB_PASS | docker login -u $DOCKERHUB_USER --password-stdin
       - echo Building backend...
       - docker build -t backend ./backend
       - docker tag backend:latest 577638398727.dkr.ecr.eu-west-2.amazonaws.com/backend:latest
@@ -21,23 +28,24 @@ phases:
     commands:
       - echo Pushing backend image...
       - docker push 577638398727.dkr.ecr.eu-west-2.amazonaws.com/backend:latest
+
       - echo Pushing frontend image...
       - docker push 577638398727.dkr.ecr.eu-west-2.amazonaws.com/frontend:latest
+
       - echo Pushing nginx image...
       - docker push 577638398727.dkr.ecr.eu-west-2.amazonaws.com/nginx:latest
 
-      - echo Generating imagedefinitions.json...
+      
+      - echo Generating imagedefinitions files...
       - |
-        echo '[ 
-          {"name":"backend","imageUri":"577638398727.dkr.ecr.eu-west-2.amazonaws.com/backend:latest"},
-          {"name":"frontend","imageUri":"577638398727.dkr.ecr.eu-west-2.amazonaws.com/frontend:latest"},
-          {"name":"nginx","imageUri":"577638398727.dkr.ecr.eu-west-2.amazonaws.com/nginx:latest"}
-        ]' > imagedefinitions.json
-
-      - echo Contents of imagedefinitions.json:
-      - cat imagedefinitions.json
-
+        echo '[{"name":"backend","imageUri":"577638398727.dkr.ecr.eu-west-2.amazonaws.com/backend:latest"}]' > backend-imagedefinitions.json
+      - |
+        echo '[{"name":"frontend","imageUri":"577638398727.dkr.ecr.eu-west-2.amazonaws.com/frontend:latest"}]' > frontend-imagedefinitions.json
+      - |
+        echo '[{"name":"nginx","imageUri":"577638398727.dkr.ecr.eu-west-2.amazonaws.com/nginx:latest"}]' > nginx-imagedefinitions.json
 
 artifacts:
   files:
-    - imagedefinitions.json
+    - backend-imagedefinitions.json
+    - frontend-imagedefinitions.json
+    - nginx-imagedefinitions.json
