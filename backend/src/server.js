@@ -12,11 +12,7 @@ import registerRoutes from './routes/index.js';
 import formbody from '@fastify/formbody';
 
 const fastify = Fastify({
-    logger: true,
-    https: {
-        key: fs.readFileSync(path.resolve(process.env.HTTPS_KEY)),
-        cert: fs.readFileSync(path.resolve(process.env.HTTPS_CERT)),
-    },
+  logger: true
 });
 
 fastify.register(formbody);

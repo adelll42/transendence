@@ -1,7 +1,7 @@
 import knex from 'knex';
 
 const db = knex({
-    client: 'sqlite3',
+    client: '3',
     connection: {
         filename: './ft.db'
     },
