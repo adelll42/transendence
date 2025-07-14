@@ -6,6 +6,10 @@ import socketRoutes from './socket.js';
 import tournamentRoutes from './tournament.js';
 
 export default async function registerRoutes(fastify, opts) {
+    fastify.get('/api/health', async (request, reply) => {
+      reply.code(200).send({ status: 'ok' });
+    });
+
     fastify.register(authRoutes, {prefix: '/auth'});
     fastify.register(userRoutes, {prefix: '/user'});
     fastify.register(matchRoutes, {prefix: '/match'});
