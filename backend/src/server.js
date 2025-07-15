@@ -1,5 +1,5 @@
 import Fastify from 'fastify';
-import cors from '@fastify/cors'; // ✅ THIS LINE
+import cors from '@fastify/cors';
 import fs from 'fs';
 import path from 'path';
 import 'dotenv/config';
@@ -23,7 +23,9 @@ fastify.register(formbody);
 fastify.register(websocket);
 fastify.register(multipart);
 fastify.register(jwtPlugin);
-fastify.register(registerRoutes);
+
+// ✅ Register all routes under "/api"
+fastify.register(registerRoutes, { prefix: '/api' });
 
 fastify.register(fastifyStatic, {
   root: path.join(fileURLToPath(import.meta.url), '../../public'),
